@@ -19,3 +19,106 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/
   	end    
 })
 
+Tab:AddButton({
+	Name = "Button!",
+	Callback = function()
+      		--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+-- leave a like pls
+
+
+_G.HeadSize = 15
+_G.Disabled = true
+ 
+game:GetService('RunService').RenderStepped:connect(function()
+if _G.Disabled then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.7
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Button!",
+	Callback = function()
+      		local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
+local player = Players.LocalPlayer
+local noclip = false
+local connection
+
+local function notify(message)
+    StarterGui:SetCore("SendNotification", {
+        Title = "Notification";
+        Text = message;
+        Duration = 3;
+    })
+end
+
+local function toggleNoclip()
+    noclip = not noclip
+    if noclip then
+        connection = RunService.Stepped:Connect(function()
+            for _, part in pairs(player.Character:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.CanCollide = false
+                end
+            end
+        end)
+        notify("noclip on, by thebestpersol. Enjoy!")
+    else
+        if connection then
+            connection:Disconnect()
+        end
+        for _, part in pairs(player.Character:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = true
+            end
+        end
+        notify("noclip off, by thebestpersol. Enjoy!")
+    end
+end
+
+local function createTool()
+    local tool = Instance.new("Tool")
+    tool.Name = "Noclip Tool"
+    tool.RequiresHandle = false
+    tool.CanBeDropped = false
+    tool.Parent = player:WaitForChild("Backpack")
+
+    tool.Activated:Connect(function()
+        toggleNoclip()
+    end)
+end
+
+local function onCharacterAdded()
+    wait(0.1)
+    createTool()
+end
+
+if player.Character then
+    onCharacterAdded()
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Button!",
+	Callback = function()
+      		
+  	end    
+})
